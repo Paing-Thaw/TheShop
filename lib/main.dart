@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:shop/screens/product_detail_screen.dart';
 import 'screens/product_overview_screen.dart';
