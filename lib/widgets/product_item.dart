@@ -1,7 +1,10 @@
+// import 'dart:html';
+
 import 'package:flutter/material.dart';
 import '../screens/product_detail_screen.dart';
 import 'package:shop/providers/product.dart';
 import 'package:provider/provider.dart';
+import 'package:shop/providers/cart.dart';
 
 class ProductItem extends StatelessWidget {
   // final String id;
@@ -11,7 +14,8 @@ class ProductItem extends StatelessWidget {
   // ProductItem(this.id, this.title, this.imageUrl);
   @override
   Widget build(BuildContext context) {
-    final product = Provider.of<Product>(context);
+    final productListener = Provider.of<Product>(context);
+    final cartListener = Provider.of<Cart>(context);
     return ClipRRect(
       borderRadius: BorderRadius.circular(10),
       child: GridTile(
@@ -21,38 +25,40 @@ class ProductItem extends StatelessWidget {
             scale: 1.2,
             child: IconButton(
               onPressed: () {
-                product.toggleFavoriteStatus();
+                productListener.toggleFavoriteStatus();
               },
-              icon: Icon(product.isFavorite? Icons.favorite : Icons.favorite_border),
-              color: Colors.black,
+              icon: Icon(productListener.isFavorite? Icons.favorite : Icons.favorite_border),
+              color: Theme.of(context).colorScheme.primary,
             ),
           ),
           trailing: Transform.scale(
             scale: 1.2,
             child: IconButton(
-              onPressed: () {},
+              onPressed: () {
+                cartListener.addItem(productListener.id, productListener.price, productListener.title, productListener.imgUrl);
+              },
               icon: Icon(Icons.shopping_cart),
-              color: Colors.black,
+              color: Theme.of(context).colorScheme.primary,
             ),
           ),
         ),
         child: GestureDetector(
           onTap: () {
             Navigator.of(context).pushNamed(
-             ProductDetailScreen.routeName, arguments: product.id,
+             ProductDetailScreen.routeName, arguments: productListener.id,
             );
           },
           child: Image.network(
-            product.imgUrl,
+            productListener.imgUrl,
             fit: BoxFit.cover,
           ),
         ),
         footer: GridTileBar(
-          backgroundColor: Colors.black54,
+          backgroundColor: Theme.of(context).colorScheme.surface.withOpacity(0.8),
 
           // leading: IconButton(icon: Icon(Icons.favorite), onPressed: () {},),
           title: (Text(
-            product.title,
+            productListener.title,
             style: TextStyle(fontSize: 12),
             textAlign: TextAlign.center,
           )),

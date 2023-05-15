@@ -31,10 +31,23 @@ class Products with ChangeNotifier {
         price: 250000,
         imgUrl:
             'https://www.stoneycreekhunting.co.nz/image/cache/catalog/product_images/corporate/mens/shirts/Mens_Corporate_Shirt_Long_Sleeve_Float_Navy-875x1000.jpg'),
+    Product(
+        id: '5',
+        title: 'Ear Phone',
+        description: 'Some description text for blue shoe',
+        price: 250000,
+        imgUrl:
+        'https://cdn.shopify.com/s/files/1/2957/8646/products/1_95e64265-30d1-42c1-9bc9-9693fea3b894.jpg?v=1664823101'),
+
   ];
 
   List<Product> get items {
     return [..._items];
+  }
+
+  List<Product> get favItems {
+    return items.where((productItem) => productItem.isFavorite).toList();
+
   }
 
   Product findById(String id) {
