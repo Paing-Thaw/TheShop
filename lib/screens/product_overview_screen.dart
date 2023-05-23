@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shop/widgets/app_drawer.dart';
 import '../providers/product.dart';
 import '../widgets/product_item.dart';
 import '../providers/products.dart';
@@ -8,6 +9,7 @@ import 'package:shop/widgets/badge.dart';
 import 'package:shop/providers/cart.dart';
 import 'package:badges/badges.dart' as badges;
 import 'package:shop/screens/cart_screen.dart';
+import 'package:shop/widgets/app_drawer.dart';
 class ProductOverViewScreen extends StatefulWidget {
   ProductOverViewScreen({Key? key}) : super(key: key);
 
@@ -79,6 +81,7 @@ class _ProductOverViewScreenState extends State<ProductOverViewScreen> {
           //           //     ),
         ],
       ),
+      drawer: AppDrawer(),
       body: ProductsGrid(_showOnlyFavorites),
     );
   }

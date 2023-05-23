@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shop/providers/cart.dart';
 import 'package:shop/widgets/cart_item.dart' as cart;
+import 'package:shop/providers/orders.dart';
 
 class CartScreen extends StatelessWidget {
+
   const CartScreen({Key? key}) : super(key: key);
   static const routeName = '/cart';
   @override
@@ -41,7 +43,14 @@ class CartScreen extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      TextButton(onPressed: () {}, child: Text('Order Now'))
+                      TextButton(
+                          onPressed: () {
+                            Provider.of<Orders>(context, listen: false).addOrder(
+                                cartListner.item.values.toList(),
+                                cartListner.totalAmount);
+                            cartListner.clearCart();
+                          },
+                          child: Text('Order Now'))
                     ],
                   )
                 ],
