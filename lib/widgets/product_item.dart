@@ -37,7 +37,7 @@ class ProductItem extends StatelessWidget {
               onPressed: () {
                 cartListener.addItem(productListener.id, productListener.price, productListener.title, productListener.imgUrl);
               },
-              icon: Icon(Icons.shopping_cart),
+              icon: Icon(Icons.add_circle_outline),
               color: Theme.of(context).colorScheme.primary,
             ),
           ),
